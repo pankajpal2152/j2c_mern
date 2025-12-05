@@ -16,23 +16,26 @@ const Navbar = () => {
     const searchRef = useRef(null);
     const navigate = useNavigate();
 
-    /* SEARCH */
+    /* CLOSE DROPDOWN IMMEDIATELY WHEN CALLED */
+    const closeDropdown = () => setActiveMega(null);
+
+    /* SEARCH SUBMIT */
     const handleSearchSubmit = () => {
         const q = searchRef.current.value.trim();
-        if (q) navigate(`/search?query=${encodeURIComponent(q)}`);
+        if (q) {
+            closeDropdown();
+            navigate(`/search?query=${encodeURIComponent(q)}`);
+        }
     };
 
-    /* AUTO HIDE NAV ON SCROLL + CLOSE DROPDOWN */
+    /* AUTO HIDE NAV ON SCROLL + AUTO CLOSE DROPDOWN */
     useEffect(() => {
         const handleScroll = () => {
-            const curr = window.scrollY;
+            let curr = window.scrollY;
             setHidden(curr > lastScroll && curr > 80);
             setLastScroll(curr);
 
-            // Close any open dropdown while scrolling
-            if (activeMega) {
-                setActiveMega(null);
-            }
+            if (activeMega) closeDropdown();
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -43,7 +46,7 @@ const Navbar = () => {
     useEffect(() => {
         const close = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                setActiveMega(null);
+                closeDropdown();
             }
         };
         document.addEventListener("mousedown", close);
@@ -59,10 +62,10 @@ const Navbar = () => {
         setActiveMega(activeMega === menu ? null : menu);
     };
 
-    // When hovering over another menu item, close any currently open dropdown
-    const handleNavHover = (menuKey) => {
-        if (activeMega && activeMega !== menuKey) {
-            setActiveMega(null);
+    /* CLOSE PREVIOUS DROPDOWN WHEN HOVERING A NEW MENU */
+    const handleNavHover = (menu) => {
+        if (activeMega && activeMega !== menu) {
+            closeDropdown();
         }
     };
 
@@ -97,9 +100,9 @@ const Navbar = () => {
                                 {activeMega === "jobs" && (
                                     <motion.div className="mega-menu modern-dropdown">
                                         <div className="dropdown-arrow"></div>
-                                        <Link to="/jobs/it">IT Jobs</Link>
-                                        <Link to="/jobs/marketing">Marketing Jobs</Link>
-                                        <Link to="/jobs/engineering">Engineering Jobs</Link>
+                                        <Link to="/jobs/it" onClick={closeDropdown}>IT Jobs</Link>
+                                        <Link to="/jobs/marketing" onClick={closeDropdown}>Marketing Jobs</Link>
+                                        <Link to="/jobs/engineering" onClick={closeDropdown}>Engineering Jobs</Link>
                                     </motion.div>
                                 )}
                             </div>
@@ -115,9 +118,9 @@ const Navbar = () => {
                                 {activeMega === "internships" && (
                                     <motion.div className="mega-menu modern-dropdown">
                                         <div className="dropdown-arrow"></div>
-                                        <Link to="/internship/work-from-home">Work From Home</Link>
-                                        <Link to="/internship/design">Design Internships</Link>
-                                        <Link to="/internship/engineering">Engineering Internships</Link>
+                                        <Link to="/internship/work-from-home" onClick={closeDropdown}>Work From Home</Link>
+                                        <Link to="/internship/design" onClick={closeDropdown}>Design Internships</Link>
+                                        <Link to="/internship/engineering" onClick={closeDropdown}>Engineering Internships</Link>
                                     </motion.div>
                                 )}
                             </div>
@@ -133,16 +136,17 @@ const Navbar = () => {
                                 {activeMega === "courses" && (
                                     <motion.div className="mega-menu modern-dropdown large">
                                         <div className="dropdown-arrow"></div>
+
                                         <div>
                                             <h4>Popular</h4>
-                                            <Link to="/courses/fullstack">Full Stack</Link>
-                                            <Link to="/courses/uiux">UI/UX</Link>
+                                            <Link to="/courses/fullstack" onClick={closeDropdown}>Full Stack</Link>
+                                            <Link to="/courses/uiux" onClick={closeDropdown}>UI/UX</Link>
                                         </div>
 
                                         <div>
                                             <h4>Certifications</h4>
-                                            <Link to="/courses/java">Java</Link>
-                                            <Link to="/courses/python">Python</Link>
+                                            <Link to="/courses/java" onClick={closeDropdown}>Java</Link>
+                                            <Link to="/courses/python" onClick={closeDropdown}>Python</Link>
                                         </div>
                                     </motion.div>
                                 )}
@@ -154,7 +158,10 @@ const Navbar = () => {
                                     type="text"
                                     placeholder="Search anything..."
                                     ref={searchRef}
-                                    onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+                                    onFocus={closeDropdown}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") handleSearchSubmit();
+                                    }}
                                 />
                                 <Search
                                     size={18}
@@ -164,21 +171,30 @@ const Navbar = () => {
                             </div>
 
                             {/* LOGIN */}
-                            <Link to="/login" className="nav-btn login-btn">Login</Link>
+                            <Link to="/login" className="nav-btn login-btn" onClick={closeDropdown}>
+                                Login
+                            </Link>
 
                             {/* REGISTER */}
-                            <Link to="/register" className="nav-btn register-btn">Register</Link>
+                            <Link to="/register" className="nav-btn register-btn" onClick={closeDropdown}>
+                                Register
+                            </Link>
 
                             {/* EMPLOYERS */}
-                            <Link to="/employer" className="nav-btn employer-btn">For Employers</Link>
+                            <Link to="/employer" className="nav-btn employer-btn" onClick={closeDropdown}>
+                                For Employers
+                            </Link>
 
                         </div>
                     </div>
 
-                    {/* MOBILE HAMBURGER — ONLY SHOW ON MOBILE */}
+                    {/* MOBILE MENU BUTTON */}
                     <button
                         className={`hamburger ${menuOpen ? "open" : ""}`}
-                        onClick={() => setMenuOpen(!menuOpen)}
+                        onClick={() => {
+                            closeDropdown();
+                            setMenuOpen(!menuOpen);
+                        }}
                     >
                         <span></span>
                         <span></span>
@@ -188,19 +204,19 @@ const Navbar = () => {
                 </div>
             </motion.nav>
 
-            {/* MOBILE DROPDOWN MENU */}
+            {/* MOBILE MENU */}
             <div className={`mobile-menu ${menuOpen ? "show-menu" : ""}`}>
                 <div className="mobile-top">
                     <h2>Menu</h2>
                     <X size={30} onClick={() => setMenuOpen(false)} />
                 </div>
 
-                <Link to="/jobs">Jobs</Link>
-                <Link to="/internship">Internships</Link>
-                <Link to="/courses">Courses</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
-                <Link to="/employer">For Employers</Link>
+                <Link to="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
+                <Link to="/internship" onClick={() => setMenuOpen(false)}>Internships</Link>
+                <Link to="/courses" onClick={() => setMenuOpen(false)}>Courses</Link>
+                <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+                <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
+                <Link to="/employer" onClick={() => setMenuOpen(false)}>For Employers</Link>
             </div>
         </>
     );
