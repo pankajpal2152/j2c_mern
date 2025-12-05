@@ -1,0 +1,184 @@
+/******** HERO SECTION ********/
+.hero-wrapper {
+    width: 100%;
+    background: #007bff;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-inner {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 40px 30px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/******** LEFT SIDE ********/
+.hero-left {
+    flex: 1;
+    color: #ffffff;
+}
+
+.hero-title {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffd44c;
+    letter-spacing: -0.5px;
+}
+
+.hero-sub {
+    font-size: 20px;
+    margin-top: 10px;
+    opacity: 0.95;
+}
+
+/******** BUTTON GROUP ********/
+.hero-btn-group {
+    display: flex;
+    gap: 18px;
+    margin-top: 35px;
+}
+
+/******** BUTTON BASE ********/
+.hero-btn {
+    position: relative;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: none;
+    overflow: hidden;
+
+    /* Modern animations */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Ripple Element */
+.hero-btn .btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    background: rgba(255, 255, 255, 0.5);
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.hero-btn:active .btn-ripple {
+    animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+    0% {
+        transform: scale(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/******** GOOGLE BUTTON ********/
+.google-btn {
+    background: #ffffff;
+    color: #000;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0px 4px 14px rgba(255, 255, 255, 0.25);
+}
+
+.google-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(255, 255, 255, 0.45);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/******** EMAIL BUTTON ********/
+.email-btn {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+}
+
+.email-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/******** TERMS ********/
+.hero-terms {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #e7e7e7;
+}
+
+.hero-terms a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/******** RIGHT IMAGE ********/
+.hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 500px;
+    object-fit: contain;
+    animation: floatHero 4s ease-in-out infinite;
+}
+
+/******** FLOATING ANIMATION ********/
+@keyframes floatHero {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/******** RESPONSIVE ********/
+@media (max-width: 900px) {
+    .hero-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px 60px;
+        gap: 40px;
+    }
+
+    .hero-btn-group {
+        flex-direction: column;
+    }
+
+    .hero-right {
+        order: -1;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+}

@@ -1,0 +1,183 @@
+/************* WRAPPER *************/
+.trending-wrapper {
+    width: 100%;
+    max-width: 1300px;
+    margin: 70px auto;
+    padding: 20px 20px 40px;
+    position: relative;
+
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding-top: 35px;
+
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.08);
+    animation: fadeUp 0.7s ease-out;
+}
+
+/************* HEADER *************/
+.trending-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trending-title {
+    font-size: 38px;
+    font-weight: 800;
+
+    background: linear-gradient(90deg, #0b6ffb, #33c9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    letter-spacing: -0.5px;
+}
+
+.view-all-btn {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0b6ffb;
+    transition: 0.3s ease;
+}
+
+.view-all-btn:hover {
+    color: #004ec2;
+    transform: translateX(4px);
+}
+
+/************* CAROUSEL *************/
+.trending-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 28px;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+}
+
+.trending-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/************* CARD *************/
+.trending-card {
+    min-width: 260px;
+    border-radius: 20px;
+    padding-bottom: 12px;
+    text-align: center;
+    text-decoration: none;
+
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+
+    box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.15);
+
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.trending-card:hover {
+    transform: translateY(-12px) scale(1.05) rotateY(6deg);
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+/************* IMAGE *************/
+.trending-img-wrapper {
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
+.trending-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.trending-card:hover .trending-img {
+    transform: scale(1.18);
+}
+
+/************* TEXT *************/
+.trending-text {
+    font-size: 17px;
+    font-weight: 600;
+    padding-top: 14px;
+    color: #000;
+}
+
+/************* ARROWS *************/
+.arrow-btn {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.2);
+
+    cursor: pointer;
+    z-index: 10;
+
+    transition: 0.25s ease;
+}
+
+.arrow-btn:hover {
+    background: #0b6ffb;
+    color: white;
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: 0 6px 26px rgba(11, 111, 251, 0.5);
+}
+
+.arrow-btn.left {
+    left: -18px;
+}
+
+.arrow-btn.right {
+    right: -18px;
+}
+
+@media (max-width: 900px) {
+    .arrow-btn {
+        display: none;
+    }
+}
+
+/************* DOTS *************/
+.dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cfcfcf;
+    transition: 0.3s ease;
+}
+
+.dot.active {
+    width: 26px;
+    background: #0b6ffb;
+    border-radius: 20px;
+}
+
+/************* ANIMATIONS *************/
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

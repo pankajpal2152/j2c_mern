@@ -1,0 +1,162 @@
+/* Section background */
+.course-wrapper {
+    width: 100%;
+    background: #adc9f7;
+    padding: 50px 0;
+}
+
+/* Main container alignment */
+.course-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+
+/***************** HEADER *****************/
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-title {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.view-all-btn {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0B6FFB;
+}
+
+/***************** FILTER BUTTONS *****************/
+.course-filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 25px 0 40px 0;
+}
+
+.course-filter-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.course-filter-btn:hover,
+.active-filter {
+    background: #0B6FFB;
+    color: white;
+    border-color: #0B6FFB;
+}
+
+/***************** ARROWS CENTERED VERTICALLY *****************/
+.course-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-20%);
+    background: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 20;
+    transition: 0.2s ease;
+}
+
+.course-arrow.left {
+    left: 0;
+}
+
+.course-arrow.right {
+    right: 0;
+}
+
+.course-arrow:hover {
+    background: #0B6FFB;
+    color: white;
+    transform: translateY(-20%) scale(1.15);
+}
+
+/***************** CAROUSEL *****************/
+.course-container {
+    display: flex;
+    gap: 30px;
+    overflow-x: hidden;
+    /* no manual scrolling, controlled by JS */
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
+}
+
+/***************** COURSE CARD *****************/
+.course-card {
+    min-width: 330px;
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.20);
+}
+
+.active-card {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+/***************** CARD IMAGE *****************/
+.course-img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.course-text {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/***************** DOT INDICATORS *****************/
+.dot-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #b5b5b5;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.active-dot {
+    background: #0B6FFB;
+    width: 24px;
+    border-radius: 20px;
+}
+
+/***************** RESPONSIVE *****************/
+@media (max-width: 900px) {
+    .course-arrow {
+        display: none;
+    }
+}

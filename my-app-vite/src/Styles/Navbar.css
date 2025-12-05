@@ -1,0 +1,264 @@
+/******** NAVBAR ********/
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    padding: 14px 0;
+    border-bottom: 1px solid #eeeeee;
+    position: relative;
+    z-index: 99998;
+}
+
+.nav-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/******** LOGO ********/
+.nav-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+}
+
+/******** NAV CENTER ********/
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/******** NAV ITEM ********/
+.nav-item {
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.25s ease;
+}
+
+.nav-item:hover {
+    color: #0b6ffb;
+    transform: translateY(-2px);
+}
+
+.nav-item span::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #0b6ffb;
+    transition: 0.25s ease;
+}
+
+.nav-item:hover span::after {
+    width: 100%;
+}
+
+/******** GLASS DROPDOWN ********/
+.mega-menu.modern-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 18px;
+    border-radius: 14px;
+    min-width: 220px;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeSlide 0.25s ease-out;
+    z-index: 99999;
+}
+
+/******** ARROW BELOW DROPDOWN ********/
+.dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: -12px;
+    left: 20px;
+}
+
+/******** DROPDOWN ITEMS ********/
+.mega-menu.modern-dropdown a {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.25s ease;
+    position: relative;
+}
+
+.mega-menu.modern-dropdown a:hover {
+    background: rgba(11, 111, 251, 0.15);
+    color: #0b6ffb;
+    transform: translateX(5px);
+}
+
+/******** SEARCH BAR — MODERNIZED ********/
+.nav-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(235, 243, 255, 0.8);
+    padding: 8px 16px;
+    border-radius: 40px;
+    border: 1px solid #d0e3ff;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+.nav-search:hover {
+    box-shadow: 0 0 12px rgba(11, 111, 251, 0.25);
+}
+
+.nav-search input {
+    border: none;
+    background: none;
+    width: 220px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-icon {
+    opacity: 0.7;
+    transition: 0.25s ease;
+}
+
+.search-icon:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/******** NAV BUTTONS ********/
+.nav-btn {
+    padding: 7px 18px;
+    border-radius: 40px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+/* LOGIN */
+.login-btn {
+    background: linear-gradient(90deg, #6fa8ff, #3f82ff);
+}
+
+/* REGISTER */
+.register-btn {
+    background: linear-gradient(90deg, #ff5e96, #ff3b7d);
+}
+
+/* EMPLOYERS */
+.employer-btn {
+    background: linear-gradient(90deg, #0b6ffb, #2bbcff);
+}
+
+/******** ANIMATED HAMBURGER — MOBILE ONLY ********/
+.hamburger {
+    display: none;
+    /* hidden on desktop */
+    width: 28px;
+    height: 24px;
+    border: none;
+    background: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 3px;
+    background: #222;
+    left: 0;
+    position: absolute;
+    transition: 0.4s ease;
+    border-radius: 5px;
+}
+
+.hamburger span:nth-child(1) {
+    top: 0;
+}
+
+.hamburger span:nth-child(2) {
+    top: 10px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 20px;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 10px;
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 10px;
+}
+
+/******** MOBILE MENU ********/
+.mobile-menu {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 70%;
+    height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+    transition: 0.3s ease;
+    z-index: 999999;
+}
+
+.show-menu {
+    right: 0;
+}
+
+/******** RESPONSIVE ********/
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-search {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    /* only mobile shows hamburger */
+}

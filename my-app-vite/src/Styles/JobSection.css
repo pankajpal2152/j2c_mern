@@ -1,0 +1,211 @@
+/******** BACKGROUND (unchanged) ********/
+.job-wrapper {
+    width: 100%;
+    background: #d6e2f5;
+    padding: 55px 0;
+}
+
+/******** CONTAINER ********/
+.job-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 22px;
+    position: relative;
+}
+
+/******** HEADER ********/
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0b2d61;
+}
+
+.job-view-all {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0B6FFB;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.job-view-all:hover {
+    transform: translateX(4px);
+}
+
+/******** FILTER BUTTONS ********/
+.job-filters {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 25px 0 35px;
+}
+
+.job-filter-btn {
+    padding: 8px 18px;
+    border-radius: 40px;
+    background: white;
+    border: 1px solid #c9c9c9;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.job-filter-btn:hover {
+    transform: translateY(-2px);
+}
+
+.active-filter {
+    background: #0B6FFB;
+    color: white;
+    border-color: #0B6FFB;
+}
+
+/******** ARROW BUTTONS ********/
+.job-arrow {
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 12;
+}
+
+.job-arrow:hover {
+    background: #0B6FFB;
+    color: white;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.job-arrow.left {
+    left: -10px;
+}
+
+.job-arrow.right {
+    right: -10px;
+}
+
+/******** HIDE SCROLLBAR ********/
+.job-container {
+    display: flex;
+    gap: 26px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 12px;
+
+    /* Hide scrollbar cross-browser */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.job-container::-webkit-scrollbar {
+    display: none;
+}
+
+/******** CARD ********/
+.job-card {
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 18px;
+    border-radius: 16px;
+
+    /* Reduced height to avoid clipping during animation */
+    height: 250px;
+
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.12);
+    transition: 0.35s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-8px) scale(1.035);
+    box-shadow: 0px 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+/******** ACTIVE CARD ********/
+.active-card {
+    transform: scale(1.05);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+}
+
+/******** ANIMATION FIX ********/
+.slide-card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.slide-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.55s ease-out;
+}
+
+/******** CARD TEXT ********/
+.job-card-header {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.job-details p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+/******** LINK ********/
+.job-link {
+    margin-top: 10px;
+    display: inline-block;
+    color: #0B6FFB;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.job-link:hover {
+    transform: translateX(5px);
+}
+
+/******** DOT INDICATORS ********/
+.job-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #bcbcbc;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.active-dot {
+    width: 22px;
+    background: #0B6FFB;
+    border-radius: 20px;
+}
+
+/******** RESPONSIVE ********/
+@media (max-width: 900px) {
+    .job-arrow {
+        display: none;
+    }
+
+    .job-card {
+        min-width: 85%;
+        height: 240px;
+    }
+}

@@ -1,0 +1,131 @@
+/**************************
+  PARTNER SECTION WRAPPER
+**************************/
+.partner-wrapper {
+    width: 100%;
+    padding: 5px 0;
+    margin: 0;
+    position: relative;
+
+    background: linear-gradient(135deg, #003c8f, #0058cc);
+    overflow: hidden;
+}
+
+/* Soft glass glow behind content */
+.partner-glass {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(12px);
+    opacity: 0.15;
+}
+
+/**************************
+  INNER CONTENT
+**************************/
+.partner-inner {
+    max-width: 1350px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    z-index: 10;
+    color: #ffffff;
+}
+
+/**************************
+  LEFT PANEL TEXT
+**************************/
+.partner-left h2 {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffe27f, #fffac2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.partner-left p {
+    font-size: 18px;
+    opacity: 0.92;
+}
+
+/**************************
+  SLIDER STYLES
+**************************/
+.partner-slider {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.partner-track {
+    display: flex;
+    gap: 65px;
+    align-items: center;
+
+    animation: slideInfinite 18s linear infinite;
+}
+
+/* Smooth infinite scroll */
+@keyframes slideInfinite {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/**************************
+  LOGO STYLE
+**************************/
+.partner-logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-logo {
+    height: 55px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: 0.3s ease;
+}
+
+/* Hover effects */
+.partner-logo:hover {
+    transform: scale(1.22);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65));
+}
+
+/**************************
+  RESPONSIVE DESIGN
+**************************/
+@media (max-width: 900px) {
+    .partner-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .partner-logo {
+        height: 45px;
+    }
+
+    .partner-track {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .partner-logo {
+        height: 38px;
+    }
+
+    .partner-left h2 {
+        font-size: 38px;
+    }
+}
