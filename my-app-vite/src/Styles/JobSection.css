@@ -69,4 +69,154 @@
     border-color: #0B6FFB;
 }
 
-/******** SC
+/******** SCROLL ARROWS ********/
+.job-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 12;
+}
+
+.job-arrow:hover {
+    background: #0B6FFB;
+    color: white;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.job-arrow.left {
+    left: -10px;
+}
+
+.job-arrow.right {
+    right: -10px;
+}
+
+/******** CARD CONTAINER ********/
+.job-container {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 12px;
+
+    scrollbar-width: none;
+}
+
+.job-container::-webkit-scrollbar {
+    display: none;
+}
+
+/******** JOB CARD ********/
+.job-card {
+    min-width: 300px;
+    background: white;
+    padding: 18px;
+    border-radius: 18px;
+
+    min-height: 280px; /* fix 1: prevent overlap */
+    position: relative;
+
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.55s ease;
+    overflow: hidden;
+}
+
+/******** WRAPPER — FIXES HOVER LAYOUT SHIFT ********/
+.job-card-content {
+    position: relative;
+    z-index: 2;
+    transition: 0.35s ease;
+}
+
+.job-card:hover .job-card-content {
+    transform: translateY(-6px);
+}
+
+.job-card:hover {
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/******** ACTIVE CARD ********/
+.active-card {
+    outline: 3px solid #0B6FFB;
+    transform: translateY(-4px); /* prevents scaling overlap */
+}
+
+/******** SLIDE-IN ANIMATION ********/
+.slide-card {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.slide-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.55s ease-out;
+}
+
+/******** TEXT ********/
+.job-card-header {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.job-details p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+/******** APPLY LINK ********/
+.job-link {
+    margin-top: 12px;
+    display: inline-block;
+    color: #0B6FFB;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.job-link:hover {
+    transform: translateX(5px);
+}
+
+/******** DOTS ********/
+.job-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #bcbcbc;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.active-dot {
+    width: 22px;
+    background: #0B6FFB;
+    border-radius: 20px;
+}
+
+/******** RESPONSIVE ********/
+@media (max-width: 900px) {
+    .job-arrow {
+        display: none;
+    }
+
+    .job-card {
+        min-width: 85%;
+        min-height: 260px;
+    }
+}
