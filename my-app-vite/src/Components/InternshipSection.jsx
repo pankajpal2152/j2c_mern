@@ -1,203 +1,113 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../Styles/InternshipSection.css";
-import { Link } from "react-router-dom";
-import {
-    MapPin,
-    Clock3,
-    IndianRupee,
-    Globe,
-    PenTool,
-    BarChart,
-    Code,
-    ChevronLeft,
-    ChevronRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const InternshipSection = () => {
-    const filters = [
-        "All",
-        "Freshers jobs",
-        "Work from home",
-        "Part Time",
-        "Media",
-        "Design",
-        "Engineering",
-    ];
-
-    const internships = [
-        {
-            title: "Web Development Intern",
-            category: "Freshers jobs",
-            icon: <Globe size={20} />,
-            location: "Remote",
-            duration: "3 Months",
-            stipend: "₹8,000/month",
-            link: "/internship/web-development",
-        },
-        {
-            title: "UI/UX Design Intern",
-            category: "Design",
-            icon: <PenTool size={20} />,
-            location: "Remote",
-            duration: "3 Months",
-            stipend: "₹8,000/month",
-            link: "/internship/uiux-design",
-        },
-        {
-            title: "Digital Marketing Intern",
-            category: "Media",
-            icon: <BarChart size={20} />,
-            location: "Remote",
-            duration: "3 Months",
-            stipend: "₹8,000/month",
-            link: "/internship/digital-marketing",
-        },
-        {
-            title: "Java Developer Intern",
-            category: "Engineering",
-            icon: <Code size={20} />,
-            location: "Remote",
-            duration: "3 Months",
-            stipend: "₹8,000/month",
-            link: "/internship/java-developer",
-        },
-    ];
-
-    const [activeCategory, setActiveCategory] = useState("All");
+    const [activeFilter, setActiveFilter] = useState("All");
     const [activeIndex, setActiveIndex] = useState(0);
     const [animateCards, setAnimateCards] = useState(false);
+    const scrollRef = useRef(null);
 
-    const sliderRef = useRef(null);
+    const internships = [
+        { title: "Web Development Intern", company: "PCS Global", location: "Kolkata", mode: "Hybrid", category: "IT" },
+        { title: "UI/UX Intern", company: "Adobe", location: "Bangalore", mode: "Remote", category: "Design" },
+        { title: "Marketing Intern", company: "Zomato", location: "Delhi", mode: "Hybrid", category: "Marketing" },
+        { title: "Finance Intern", company: "TCS", location: "Mumbai", mode: "Office", category: "Finance" },
+        { title: "Cloud Intern", company: "Infosys", location: "Pune", mode: "Remote", category: "IT" }
+    ];
 
-    const filteredInternships =
-        activeCategory === "All"
-            ? internships
-            : internships.filter((job) => job.category === activeCategory);
+    const filters = ["All", "IT", "Marketing", "Design", "Finance"];
 
-    const scrollToCard = (index) => {
-        const cardWidth = 330;
-        sliderRef.current.scrollTo({
-            left: index * cardWidth,
-            behavior: "smooth",
-        });
-    };
+    const filteredData =
+        activeFilter === "All" ? internships : internships.filter((i) => i.category === activeFilter);
 
-    const nextCard = () => {
-        let newIndex = activeIndex + 1;
-        if (newIndex >= filteredInternships.length) newIndex = 0;
-        setActiveIndex(newIndex);
-        scrollToCard(newIndex);
-    };
-
-    const prevCard = () => {
-        let newIndex = activeIndex - 1;
-        if (newIndex < 0) newIndex = filteredInternships.length - 1;
-        setActiveIndex(newIndex);
-        scrollToCard(newIndex);
-    };
-
-    /** AUTO SCROLL **/
     useEffect(() => {
-        const timer = setInterval(nextCard, 4000);
-        return () => clearInterval(timer);
-    }, [activeIndex, filteredInternships]);
-
-    /** SLIDE-IN ANIMATION WHEN SECTION ENTERS VIEW **/
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) setAnimateCards(true);
-            },
-            { threshold: 0.3 }
-        );
-
-        const section = document.querySelector(".internship-wrapper");
-        if (section) observer.observe(section);
-
-        return () => observer.disconnect();
+        setTimeout(() => setAnimateCards(true), 150);
     }, []);
 
+    const scrollLeft = () => {
+        scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
+        setActiveIndex((prev) => (prev > 0 ? prev - 1 : filteredData.length - 1));
+    };
+
+    const scrollRight = () => {
+        scrollRef.current.scrollBy({ left: 350, behavior: "smooth" });
+        setActiveIndex((prev) => (prev < filteredData.length - 1 ? prev + 1 : 0));
+    };
+
     return (
-        <section className="internship-wrapper">
-            <div className="internship-inner">
+        <section className="intern-wrapper">
+
+            {/* OUTSIDE SCROLL BUTTONS */}
+            <button className="intern-scroll-btn left-btn" onClick={scrollLeft}>
+                <ChevronLeft size={26} />
+            </button>
+
+            <div className="intern-inner">
 
                 {/* HEADER */}
-                <div className="internship-header">
-                    <h2 className="internship-title">Internship?</h2>
-                    <Link to="/internship" className="internship-view-all">
-                        View All →
-                    </Link>
+                <div className="intern-header">
+                    <h2 className="intern-title">Internships</h2>
+                    <a href="#" className="intern-view-all">View All</a>
                 </div>
 
-                {/* FILTERS */}
-                <div className="internship-filters">
-                    {filters.map((btn, index) => (
+                {/* FILTER BUTTONS */}
+                <div className="intern-filters">
+                    {filters.map((filter) => (
                         <button
-                            key={index}
-                            className={`internship-filter-btn ${activeCategory === btn ? "active-filter" : ""
-                                }`}
+                            key={filter}
+                            className={`intern-filter-btn ${activeFilter === filter ? "active-filter" : ""}`}
                             onClick={() => {
-                                setActiveCategory(btn);
-                                setActiveIndex(0);
-                                scrollToCard(0);
+                                setAnimateCards(false);
+                                setTimeout(() => {
+                                    setActiveFilter(filter);
+                                    setAnimateCards(true);
+                                }, 120);
                             }}
                         >
-                            {btn}
+                            {filter}
                         </button>
                     ))}
                 </div>
 
-                {/* ARROWS */}
-                <button className="internship-arrow left" onClick={prevCard}>
-                    <ChevronLeft size={24} />
-                </button>
-
-                <button className="internship-arrow right" onClick={nextCard}>
-                    <ChevronRight size={24} />
-                </button>
-
-                {/* INTERNSHIP CARDS */}
-                <div className="internship-container" ref={sliderRef}>
-                    {filteredInternships.map((job, index) => (
+                {/* CARD ROW */}
+                <div className="intern-container" ref={scrollRef}>
+                    {filteredData.map((card, index) => (
                         <div
-                            className={`internship-card slide-card ${animateCards ? "slide-in" : ""
-                                } ${index === activeIndex ? "active-card" : ""}`}
                             key={index}
-                            style={{ transitionDelay: `${index * 0.15}s` }}
+                            className={`intern-card fade-card 
+                                ${animateCards ? "fade-in" : "fade-out"}
+                                ${index === activeIndex ? "active-card" : ""}`}
                         >
-                            <div className="internship-card-header">
-                                {job.icon}
-                                <h3>{job.title}</h3>
+                            <h3 className="intern-card-header">{card.title}</h3>
+
+                            <div className="intern-details">
+                                <p><strong>Company:</strong> {card.company}</p>
+                                <p><strong>Location:</strong> {card.location}</p>
+                                <p><strong>Mode:</strong> {card.mode}</p>
                             </div>
 
-                            <div className="internship-details">
-                                <p><MapPin size={16} /> Location: {job.location}</p>
-                                <p><Clock3 size={16} /> Duration: {job.duration}</p>
-                                <p><IndianRupee size={16} /> Stipend: {job.stipend}</p>
-                            </div>
-
-                            <Link to={job.link} className="internship-link">
-                                View details →
-                            </Link>
+                            <a href="#" className="intern-link">Apply Now →</a>
                         </div>
                     ))}
                 </div>
 
                 {/* DOT INDICATORS */}
-                <div className="internship-dots">
-                    {filteredInternships.map((_, idx) => (
+                <div className="intern-dots">
+                    {filteredData.map((_, index) => (
                         <div
-                            key={idx}
-                            className={`dot ${activeIndex === idx ? "active-dot" : ""}`}
-                            onClick={() => {
-                                setActiveIndex(idx);
-                                scrollToCard(idx);
-                            }}
-                        ></div>
+                            key={index}
+                            className={`dot ${index === activeIndex ? "active-dot" : ""}`}
+                        />
                     ))}
                 </div>
-
             </div>
+
+            {/* RIGHT SCROLL BUTTON */}
+            <button className="intern-scroll-btn right-btn" onClick={scrollRight}>
+                <ChevronRight size={26} />
+            </button>
+
         </section>
     );
 };
