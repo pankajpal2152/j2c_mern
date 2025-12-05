@@ -22,16 +22,22 @@ const Navbar = () => {
         if (q) navigate(`/search?query=${encodeURIComponent(q)}`);
     };
 
-    /* AUTO HIDE NAV ON SCROLL */
+    /* AUTO HIDE NAV ON SCROLL + CLOSE DROPDOWN */
     useEffect(() => {
         const handleScroll = () => {
-            let curr = window.scrollY;
+            const curr = window.scrollY;
             setHidden(curr > lastScroll && curr > 80);
             setLastScroll(curr);
+
+            // Close any open dropdown while scrolling
+            if (activeMega) {
+                setActiveMega(null);
+            }
         };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScroll]);
+    }, [lastScroll, activeMega]);
 
     /* CLOSE DROPDOWN ON OUTSIDE CLICK */
     useEffect(() => {
@@ -51,6 +57,13 @@ const Navbar = () => {
 
     const toggleDropdown = (menu) => {
         setActiveMega(activeMega === menu ? null : menu);
+    };
+
+    // When hovering over another menu item, close any currently open dropdown
+    const handleNavHover = (menuKey) => {
+        if (activeMega && activeMega !== menuKey) {
+            setActiveMega(null);
+        }
     };
 
     return (
@@ -74,7 +87,11 @@ const Navbar = () => {
                         <div className="nav-links">
 
                             {/* JOBS */}
-                            <div className="nav-item" onClick={() => toggleDropdown("jobs")}>
+                            <div
+                                className="nav-item"
+                                onMouseEnter={() => handleNavHover("jobs")}
+                                onClick={() => toggleDropdown("jobs")}
+                            >
                                 <span>Jobs</span> <ChevronDown size={16} />
 
                                 {activeMega === "jobs" && (
@@ -88,7 +105,11 @@ const Navbar = () => {
                             </div>
 
                             {/* INTERNSHIPS */}
-                            <div className="nav-item" onClick={() => toggleDropdown("internships")}>
+                            <div
+                                className="nav-item"
+                                onMouseEnter={() => handleNavHover("internships")}
+                                onClick={() => toggleDropdown("internships")}
+                            >
                                 <span>Internships</span> <ChevronDown size={16} />
 
                                 {activeMega === "internships" && (
@@ -102,7 +123,11 @@ const Navbar = () => {
                             </div>
 
                             {/* COURSES */}
-                            <div className="nav-item" onClick={() => toggleDropdown("courses")}>
+                            <div
+                                className="nav-item"
+                                onMouseEnter={() => handleNavHover("courses")}
+                                onClick={() => toggleDropdown("courses")}
+                            >
                                 <span>Courses</span> <ChevronDown size={16} />
 
                                 {activeMega === "courses" && (
@@ -151,7 +176,10 @@ const Navbar = () => {
                     </div>
 
                     {/* MOBILE HAMBURGER — ONLY SHOW ON MOBILE */}
-                    <button className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+                    <button
+                        className={`hamburger ${menuOpen ? "open" : ""}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
