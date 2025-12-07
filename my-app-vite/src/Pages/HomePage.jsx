@@ -5,6 +5,8 @@ import Trending from "../Components/Trending";
 import JobSection from "../Components/JobSection";
 import InternshipSection from "../Components/InternshipSection";
 import CourseSection from "../Components/CourseSection";
+import CertificateSection from "../Components/CertificateSection";
+
 
 const HomePage = () => {
     return (
@@ -15,6 +17,7 @@ const HomePage = () => {
             <JobSection />
             <InternshipSection/>
             <CourseSection />
+            <CertificateSection/>
         </>
     );
 };
