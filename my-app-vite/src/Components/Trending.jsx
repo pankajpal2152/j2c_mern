@@ -17,25 +17,23 @@ const Trending = () => {
 
     /* AUTO SLIDE */
     useEffect(() => {
-        const interval = setInterval(() => {
-            scrollRight();
-        }, 3200);
+        const interval = setInterval(() => scrollRight(), 3200);
         return () => clearInterval(interval);
     });
 
     const scrollLeft = () => {
-        sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
+        sliderRef.current.scrollBy({ left: -350, behavior: "smooth" });
         updateDots(-1);
     };
 
     const scrollRight = () => {
-        sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
+        sliderRef.current.scrollBy({ left: 350, behavior: "smooth" });
         updateDots(1);
     };
 
-    const updateDots = (direction) => {
+    const updateDots = (dir) => {
         setActiveIndex((prev) => {
-            let next = prev + direction;
+            let next = prev + dir;
             if (next < 0) next = items.length - 1;
             if (next >= items.length) next = 0;
             return next;
@@ -43,51 +41,43 @@ const Trending = () => {
     };
 
     return (
-        <section className="trending-wrapper fade-in-section">
-            <div className="trending-header">
-                <h2 className="trending-title">Trending Now</h2>
-                <Link to="/courses" className="view-all-btn">Explore All →</Link>
-            </div>
+        <section className="trending-wrapper">
 
-            {/* Arrow Buttons */}
-            <button className="arrow-btn left" onClick={scrollLeft}>
+            {/* ARROWS Positioned between wrapper & inner */}
+            <button className="trend-scroll-btn left" onClick={scrollLeft}>
                 <ChevronLeft size={26} />
             </button>
 
-            <button className="arrow-btn right" onClick={scrollRight}>
+            <button className="trend-scroll-btn right" onClick={scrollRight}>
                 <ChevronRight size={26} />
             </button>
 
-            {/* Carousel */}
-            <div ref={sliderRef} className="trending-carousel">
-                {items.map((item, index) => (
-                    <Link
-                        to={item.link}
-                        className="trending-card"
-                        key={index}
-                        style={{ "--i": index }}
-                    >
-                        <div className="trending-img-wrapper">
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                loading="lazy"
-                                className="trending-img"
-                            />
-                        </div>
-                        <p className="trending-text">{item.title}</p>
-                    </Link>
-                ))}
-            </div>
+            <div className="trending-inner">
 
-            {/* Dot Indicators */}
-            <div className="dots-container">
-                {items.map((_, idx) => (
-                    <span
-                        key={idx}
-                        className={`dot ${activeIndex === idx ? "active" : ""}`}
-                    ></span>
-                ))}
+                {/* HEADER */}
+                <div className="trending-header">
+                    <h2 className="trending-title">Trending Now</h2>
+                    <Link to="/courses" className="view-all-btn">Explore All →</Link>
+                </div>
+
+                {/* CAROUSEL */}
+                <div ref={sliderRef} className="trending-carousel">
+                    {items.map((item, index) => (
+                        <Link to={item.link} className="trending-card" key={index}>
+                            <div className="trending-img-wrapper">
+                                <img src={item.image} alt={item.title} className="trending-img" loading="lazy" />
+                            </div>
+                            <p className="trending-text">{item.title}</p>
+                        </Link>
+                    ))}
+                </div>
+
+                {/* DOTS */}
+                <div className="dots-container">
+                    {items.map((_, idx) => (
+                        <span key={idx} className={`dot ${activeIndex === idx ? "active" : ""}`}></span>
+                    ))}
+                </div>
             </div>
         </section>
     );

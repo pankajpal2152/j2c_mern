@@ -30,12 +30,12 @@ const CourseSection = () => {
     });
 
     const scrollLeft = () => {
-        sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
+        sliderRef.current.scrollBy({ left: -350, behavior: "smooth" });
         updateDots(-1);
     };
 
     const scrollRight = () => {
-        sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
+        sliderRef.current.scrollBy({ left: 350, behavior: "smooth" });
         updateDots(1);
     };
 
@@ -50,6 +50,16 @@ const CourseSection = () => {
 
     return (
         <section className="course-wrapper">
+
+            {/* OUTSIDE ARROWS — between wrapper & inner */}
+            <button className="course-scroll-btn left" onClick={scrollLeft}>
+                <ChevronLeft size={26} />
+            </button>
+
+            <button className="course-scroll-btn right" onClick={scrollRight}>
+                <ChevronRight size={26} />
+            </button>
+
             <div className="course-inner fade-up">
 
                 {/* HEADER */}
@@ -70,15 +80,6 @@ const CourseSection = () => {
                         </button>
                     ))}
                 </div>
-
-                {/* ARROWS */}
-                <button className="course-arrow left" onClick={scrollLeft}>
-                    <ChevronLeft size={22} />
-                </button>
-
-                <button className="course-arrow right" onClick={scrollRight}>
-                    <ChevronRight size={22} />
-                </button>
 
                 {/* CAROUSEL */}
                 <div ref={sliderRef} className="course-carousel">
