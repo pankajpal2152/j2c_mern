@@ -180,9 +180,25 @@
     background: linear-gradient(90deg, #ff5e96, #ff3b7d);
 }
 
+/* EMPLOYERS BUTTON — FIXED + MATCHED TO OTHER BUTTONS */
 .employer-btn {
-    background: linear-gradient(90deg, #0b6ffb, #2bbcff);
+    padding: 8px 18px; /* same as login/register */
+    border-radius: 40px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(90deg, #009ffd, #2a2a72); /* unique elegant gradient */
+    transition: 0.25s ease;
+    display: inline-block;
+    line-height: normal; /* removes upper padding imbalance */
 }
+
+/* hover animation same as login/register */
+.employer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 159, 253, 0.35);
+}
+
 
 /******** MOBILE HAMBURGER ********/
 .hamburger {

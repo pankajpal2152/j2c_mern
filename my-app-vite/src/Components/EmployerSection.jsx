@@ -32,7 +32,7 @@ const EmployerSection = () => {
                         <strong> AI-powered tools</strong> and smart filters to hire faster.
                     </p>
 
-                    <Link to="/employer-post" className="employer-btn">
+                    <Link to="/employer-post" className="employer_section-btn">
                         Post now for free →
                     </Link>
                 </div>

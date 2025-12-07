@@ -9,6 +9,7 @@ import CertificateSection from "../Components/CertificateSection";
 import EmployerSection from "../Components/EmployerSection";
 import StoriesSection from "../Components/StoriesSection";
 import GovernmentBody from "../Components/GovernmentBody";
+import KickStart from "../Components/KickStart";
 
 
 const HomePage = () => {
@@ -24,6 +25,7 @@ const HomePage = () => {
             <EmployerSection/>
             <StoriesSection/>
             <GovernmentBody/>
+            <KickStart/>
         </>
     );
 };

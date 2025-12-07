@@ -17,7 +17,7 @@
     width: 90%;
     max-width: 1350px;
 
-    background: #2d74d6;
+    background: #6b9fe8;
     border-radius: 26px;
 
     padding: 60px 65px;
@@ -86,26 +86,23 @@
 }
 
 /**************** BUTTON ****************/
-.employer-btn {
-    display: inline-block;
-    margin-top: 32px;
-
-    padding: 16px 34px;
-    background: #ffd429;
-    color: #000;
-    font-weight: 700;
-    font-size: 17px;
-
-    border-radius: 14px;
+.employer_section-btn {
+    padding: 8px 18px; /* same as login/register */
+    border-radius: 40px;
+    font-weight: 600;
+    color: #2a2a72;
     text-decoration: none;
-
-    transition: 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    /* background: linear-gradient(90deg, #2a2a72, #009ffd,); unique elegant gradient */
+    transition: 0.25s ease;
+    display: inline-block;
+    line-height: normal; /* removes upper padding imbalance */
+    background: linear-gradient(90deg, #ffcf4d, #ffb800);
 }
 
-.employer-btn:hover {
-    transform: translateY(-4px) scale(1.04);
-    background: #fff278;
+/* hover animation same as login/register */
+.employer_section-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 159, 253, 0.35);
 }
 
 /**************** RESPONSIVE ****************/
