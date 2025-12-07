@@ -58,9 +58,7 @@
 .employer-tag {
     font-size: 15px;
     font-weight: 600;
-    color: #d9e7ff;
     background: rgba(255, 255, 255, 0.2);
-
     padding: 8px 18px;
     border-radius: 12px;
     backdrop-filter: blur(6px);
