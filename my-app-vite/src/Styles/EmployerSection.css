@@ -1,0 +1,139 @@
+/**************** WRAPPER ****************/
+.employer-wrapper {
+    width: 100%;
+    padding: 90px 0;
+    display: flex;
+    justify-content: center;
+
+    background: #ffffff;
+}
+
+/**************** MAIN CARD ****************/
+.employer-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 90%;
+    max-width: 1350px;
+
+    background: #2d74d6;
+    border-radius: 26px;
+
+    padding: 60px 65px;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.15);
+
+    animation: fadeUp 1s ease;
+}
+
+/**************** IMAGE SIDE ****************/
+.employer-left {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+}
+
+.employer-img {
+    width: 100%;
+    max-width: 420px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.28));
+
+    animation: floatImg 4s ease-in-out infinite;
+}
+
+@keyframes floatImg {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/**************** CONTENT SIDE ****************/
+.employer-right {
+    flex: 1.8;
+    padding-left: 60px;
+    color: white;
+}
+
+.employer-tag {
+    font-size: 15px;
+    font-weight: 600;
+    color: #d9e7ff;
+    background: rgba(255, 255, 255, 0.2);
+
+    padding: 8px 18px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+
+.employer-title {
+    margin-top: 22px;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.employer-title span {
+    color: #ffdf5d;
+}
+
+.employer-sub {
+    margin-top: 18px;
+    font-size: 18px;
+    opacity: 0.9;
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+/**************** BUTTON ****************/
+.employer-btn {
+    display: inline-block;
+    margin-top: 32px;
+
+    padding: 16px 34px;
+    background: #ffd429;
+    color: #000;
+    font-weight: 700;
+    font-size: 17px;
+
+    border-radius: 14px;
+    text-decoration: none;
+
+    transition: 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.employer-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    background: #fff278;
+}
+
+/**************** RESPONSIVE ****************/
+@media (max-width: 950px) {
+
+    .employer-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 35px;
+    }
+
+    .employer-right {
+        padding-left: 0;
+        margin-top: 40px;
+    }
+
+    .employer-title {
+        font-size: 32px;
+    }
+
+    .employer-btn {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/**************** ANIMATIONS ****************/
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

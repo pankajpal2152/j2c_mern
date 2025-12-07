@@ -6,6 +6,7 @@ import JobSection from "../Components/JobSection";
 import InternshipSection from "../Components/InternshipSection";
 import CourseSection from "../Components/CourseSection";
 import CertificateSection from "../Components/CertificateSection";
+import EmployerSection from "../Components/EmployerSection";
 
 
 const HomePage = () => {
@@ -18,6 +19,7 @@ const HomePage = () => {
             <InternshipSection/>
             <CourseSection />
             <CertificateSection/>
+            <EmployerSection/>
         </>
     );
 };
