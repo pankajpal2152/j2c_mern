@@ -11,6 +11,7 @@ import StoriesSection from "../Components/StoriesSection";
 import GovernmentBody from "../Components/GovernmentBody";
 import KickStart from "../Components/KickStart";
 import QuickLinks from "../Components/QuickLinks";
+import Footer from "../Components/Footer";
 
 
 const HomePage = () => {
@@ -20,14 +21,15 @@ const HomePage = () => {
             <PartnerSlider />
             <Trending />
             <JobSection />
-            <InternshipSection/>
+            <InternshipSection />
             <CourseSection />
-            <CertificateSection/>
-            <EmployerSection/>
-            <StoriesSection/>
-            <GovernmentBody/>
-            <KickStart/>
-            <QuickLinks/>
+            <CertificateSection />
+            <EmployerSection />
+            <StoriesSection />
+            <GovernmentBody />
+            <KickStart />
+            <QuickLinks />
+            <Footer />
         </>
     );
 };
