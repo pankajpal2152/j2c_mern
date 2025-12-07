@@ -10,6 +10,7 @@ import EmployerSection from "../Components/EmployerSection";
 import StoriesSection from "../Components/StoriesSection";
 import GovernmentBody from "../Components/GovernmentBody";
 import KickStart from "../Components/KickStart";
+import QuickLinks from "../Components/QuickLinks";
 
 
 const HomePage = () => {
@@ -26,6 +27,7 @@ const HomePage = () => {
             <StoriesSection/>
             <GovernmentBody/>
             <KickStart/>
+            <QuickLinks/>
         </>
     );
 };
