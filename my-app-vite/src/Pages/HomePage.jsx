@@ -7,6 +7,8 @@ import InternshipSection from "../Components/InternshipSection";
 import CourseSection from "../Components/CourseSection";
 import CertificateSection from "../Components/CertificateSection";
 import EmployerSection from "../Components/EmployerSection";
+import StoriesSection from "../Components/StoriesSection";
+import GovernmentBody from "../Components/GovernmentBody";
 
 
 const HomePage = () => {
@@ -20,6 +22,8 @@ const HomePage = () => {
             <CourseSection />
             <CertificateSection/>
             <EmployerSection/>
+            <StoriesSection/>
+            <GovernmentBody/>
         </>
     );
 };

@@ -1,0 +1,201 @@
+/*********************************
+    STORIES SECTION WRAPPER
+**********************************/
+.stories-wrapper {
+    width: 100%;
+    padding: 90px 0;
+    background: #f7faff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/*********************************
+    INNER CONTENT
+**********************************/
+.stories-inner {
+    width: 90%;
+    max-width: 1350px;
+    text-align: center;
+}
+
+.stories-title {
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #2b7cff, #00c3ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stories-subtitle {
+    margin-top: 8px;
+    font-size: 18px;
+    opacity: 0.78;
+}
+
+/*********************************
+    CLEAN ARROW BUTTONS (NO BG)
+**********************************/
+.stories-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 50;
+    padding: 0;
+}
+
+.stories-btn.left {
+    left: 20px;
+}
+
+.stories-btn.right {
+    right: 20px;
+}
+
+.stories-btn svg {
+    stroke: #2b7cff;
+    transition: 0.25s;
+}
+
+.stories-btn:hover svg {
+    stroke: #005fff;
+    transform: scale(1.22);
+}
+
+@media (max-width: 950px) {
+    .stories-btn {
+        display: none;
+    }
+}
+
+/*********************************
+    CAROUSEL
+**********************************/
+.stories-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 45px;
+    margin-top: 45px;
+    padding: 40px 40px;
+
+    /* infinite-scroll friendly */
+    scroll-snap-type: x mandatory;
+}
+
+.stories-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/*********************************
+    GLASS STORY CARD + 3D TILT
+**********************************/
+.story-card {
+    min-width: 330px;
+    max-width: 330px;
+    padding: 30px;
+
+    border-radius: 22px;
+
+    /* Glass background */
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    scroll-snap-align: center;
+
+    transition: 0.35s ease;
+    box-shadow: 0px 18px 38px rgba(0, 0, 0, 0.18);
+
+    /* 3D tilt */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.story-card:hover {
+    transform: rotateY(8deg) rotateX(6deg) scale(1.06);
+}
+
+/*********************************
+    ACTIVE CARD GLOW
+**********************************/
+.active-card {
+    border: 2px solid #2b7cff;
+    box-shadow: 0px 18px 45px rgba(0, 132, 255, 0.35);
+}
+
+/*********************************
+    STORY IMAGE
+**********************************/
+.story-img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 18px;
+
+    box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+/*********************************
+    TEXT
+**********************************/
+.story-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.story-role {
+    color: #2b7cff;
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+/*********************************
+    QUOTE — NORMAL (No typing effect)
+**********************************/
+.story-quote {
+    font-size: 15px;
+    opacity: 0.85;
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.5;
+    white-space: normal;
+    border: none;
+}
+
+/*********************************
+    DOT INDICATORS
+**********************************/
+.stories-dots {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #d4e6ff;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.dot.active {
+    width: 26px;
+    background: #2b7cff;
+    border-radius: 40px;
+}
+
+/*********************************
+    APPEAR ANIMATION
+**********************************/
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

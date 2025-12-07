@@ -1,0 +1,115 @@
+/*********************************
+    WRAPPER SECTION
+**********************************/
+.gov-wrapper {
+    width: 100%;
+    padding: 60px 0 90px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, #f9fbff, #f2f6ff);
+}
+
+/*********************************
+    GLASS CARD CONTAINER
+**********************************/
+.gov-card {
+    width: 90%;
+    max-width: 1350px;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 50px 40px;
+    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.08);
+    animation: fadeUp 0.7s ease forwards;
+}
+
+/*********************************
+    TITLE
+**********************************/
+.gov-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1b1b1b;
+    margin-bottom: 40px;
+}
+
+/*********************************
+    LOGOS ROW
+**********************************/
+.gov-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
+    position: relative;
+}
+
+/*********************************
+    EACH ITEM
+**********************************/
+.gov-item {
+    text-align: center;
+    position: relative;
+    flex: 1;
+}
+
+/*********************************
+    LOGO IMAGE
+**********************************/
+.gov-logo {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.gov-logo:hover {
+    transform: scale(1.15);
+}
+
+/*********************************
+    LOGO TITLE
+**********************************/
+.gov-name {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/*********************************
+    DIVIDER LINE BETWEEN LOGOS
+**********************************/
+.gov-divider {
+    position: absolute;
+    top: 5px;
+    right: -18px;
+    width: 1px;
+    height: 70px;
+    background: #d5e0f5;
+}
+
+@media (max-width: 950px) {
+    .gov-list {
+        flex-direction: column;
+        gap: 45px;
+    }
+
+    .gov-divider {
+        display: none;
+    }
+}
+
+/*********************************
+    ANIMATIONS
+**********************************/
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
