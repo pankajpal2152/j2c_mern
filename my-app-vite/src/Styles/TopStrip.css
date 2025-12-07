@@ -1,0 +1,60 @@
+.top-strip {
+    width: 100%;
+    background: #0098dc;          /* Same as your screenshot */
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* LEFT SIDE */
+.strip-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.strip-item {
+    color: #ffffff;
+}
+
+.strip-divider {
+    opacity: 0.7;
+}
+
+/* RIGHT SIDE SOCIAL ICONS */
+.strip-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.strip-right a {
+    text-decoration: none;
+    color: #ffffff;          /* pure white */
+    font-size: 18px;         /* icon size */
+    display: flex;
+    align-items: center;
+    transition: 0.2s ease;
+}
+
+.strip-right a:hover {
+    color: #d0f2ff;          /* subtle highlight */
+    transform: translateY(-2px);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+    .top-strip {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+    }
+
+    .strip-left {
+        flex-direction: column;
+        gap: 2px;
+    }
+}

@@ -1,7 +1,8 @@
 import React from "react";
+
 import Hero from "../Components/Hero";
 import PartnerSlider from "../Components/PartnerSlider";
-import Trending from "../Components/Trending";
+import TrendingSection from "../Components/Trending";
 import JobSection from "../Components/JobSection";
 import InternshipSection from "../Components/InternshipSection";
 import CourseSection from "../Components/CourseSection";
@@ -11,15 +12,13 @@ import StoriesSection from "../Components/StoriesSection";
 import GovernmentBody from "../Components/GovernmentBody";
 import KickStart from "../Components/KickStart";
 import QuickLinks from "../Components/QuickLinks";
-import Footer from "../Components/Footer";
-
 
 const HomePage = () => {
     return (
         <>
             <Hero />
             <PartnerSlider />
-            <Trending />
+            <TrendingSection />
             <JobSection />
             <InternshipSection />
             <CourseSection />
@@ -29,7 +28,6 @@ const HomePage = () => {
             <GovernmentBody />
             <KickStart />
             <QuickLinks />
-            <Footer />
         </>
     );
 };
