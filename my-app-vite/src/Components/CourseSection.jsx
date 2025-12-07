@@ -64,8 +64,13 @@ const CourseSection = () => {
 
                 {/* HEADER */}
                 <div className="course-header">
-                    <h2 className="course-title">Top Career Courses</h2>
+                    <h2 className="course-title">Placement Courses with AI</h2>
+
                     <Link to="/courses" className="view-all-btn">View All →</Link>
+                </div>
+
+                <div className="course-provide">
+                    <p>Exclusive placement opportunities | Course fee refund if not hired | Get placed in top brands</p>
                 </div>
 
                 {/* FILTER BUTTONS */}

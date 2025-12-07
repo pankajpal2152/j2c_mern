@@ -51,8 +51,12 @@ const JobSection = () => {
             <div className="job-inner">
                 {/* HEADER */}
                 <div className="job-header">
-                    <h2 className="job-title">Jobs</h2>
-                    <a href="#" className="job-view-all">View All</a>
+                    <h2 className="job-title">What are you looking for today?</h2>
+                    <a href="#" className="job-view-all">View All →</a>
+                </div>
+
+                <div className="job-provide">
+                    <h2>Freshers Job</h2>
                 </div>
 
                 {/* FILTER BUTTONS */}

@@ -56,11 +56,13 @@ const CertificateSection = () => {
 
                 {/* HEADER */}
                 <div className="certificate-header">
-                    <h2 className="certificate-title">Professional Certificates</h2>
+                    <h2 className="certificate-title">Popular certification courses</h2>
+
                     <Link to="/certificates" className="certificate-view-all">
                         View All →
                     </Link>
                 </div>
+                <div><h3 className="">Fastest way to build your CV</h3></div>
 
                 {/* CAROUSEL */}
                 <div ref={sliderRef} className="certificate-carousel">
