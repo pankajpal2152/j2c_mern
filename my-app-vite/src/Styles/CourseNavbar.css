@@ -1,0 +1,85 @@
+.fs-nav {
+  width: 100%;
+  background: #ffffff;
+  padding: 16px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #3b1cd6;
+}
+
+.fs-logo img {
+  height: 55px;
+  cursor: pointer;
+}
+
+.fs-center {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+}
+
+.fs-item {
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.offer-tag {
+  background: orange;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
+
+.fs-mega {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 750px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.18);
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+  z-index: 9999;
+}
+
+.fs-col {
+  width: 30%;
+}
+
+.fs-col h4 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fs-col p {
+  font-size: 14px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.fs-col p:hover {
+  color: #0b6ffb;
+  font-weight: 600;
+}
+
+.fs-login {
+  padding: 8px 22px;
+  border: 1px solid #0b6ffb;
+  color: #0b6ffb;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
