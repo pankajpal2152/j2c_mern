@@ -1,225 +1,216 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronDown, X, Search } from "lucide-react";
+import { ChevronDown, Search, X } from "lucide-react";
 import { motion } from "framer-motion";
 import logoPng from "../assets/logo.png";
 import "../Styles/Navbar.css";
 
 const Navbar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [activeMega, setActiveMega] = useState(null);
-    const [hidden, setHidden] = useState(false);
-    const [lastScroll, setLastScroll] = useState(0);
-    const [logoRipple, setLogoRipple] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
+  const navigate = useNavigate();
 
-    const dropdownRef = useRef(null);
-    const searchRef = useRef(null);
-    const navigate = useNavigate();
+  /* SEARCH */
+  const handleSearchSubmit = () => {
+    const q = searchRef.current.value.trim();
+    if (q) navigate(`/search?query=${encodeURIComponent(q)}`);
+    setActiveMenu(null);
+  };
 
-    /* CLOSE DROPDOWN IMMEDIATELY WHEN CALLED */
-    const closeDropdown = () => setActiveMega(null);
+  /* CLOSE ON SCROLL */
+  useEffect(() => {
+    const handleScroll = () => setActiveMenu(null);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    /* SEARCH SUBMIT */
-    const handleSearchSubmit = () => {
-        const q = searchRef.current.value.trim();
-        if (q) {
-            closeDropdown();
-            navigate(`/search?query=${encodeURIComponent(q)}`);
-        }
+  /* CLOSE ON OUTSIDE CLICK */
+  useEffect(() => {
+    const handleOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setActiveMenu(null);
+      }
     };
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, []);
 
-    /* AUTO HIDE NAV ON SCROLL + AUTO CLOSE DROPDOWN */
-    useEffect(() => {
-        const handleScroll = () => {
-            let curr = window.scrollY;
-            setHidden(curr > lastScroll && curr > 80);
-            setLastScroll(curr);
+  /* MENU CLICK HANDLER */
+  const toggleMenu = (menu) => {
+    setActiveMenu((prev) => (prev === menu ? null : menu));
+  };
 
-            if (activeMega) closeDropdown();
-        };
+  return (
+    <>
+      <motion.nav className="navbar">
+        <div className="nav-inner">
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScroll, activeMega]);
+          {/* LEFT: LOGO (extremely left inside container) */}
+          <Link to="/" className="nav-logo">
+            <img src={logoPng} alt="Logo" className="logo-img" />
+          </Link>
 
-    /* CLOSE DROPDOWN ON OUTSIDE CLICK */
-    useEffect(() => {
-        const close = (e) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                closeDropdown();
-            }
-        };
-        document.addEventListener("mousedown", close);
-        return () => document.removeEventListener("mousedown", close);
-    }, []);
+          {/* CENTER: MENUS + SEARCH + LOGIN/REGISTER */}
+          <div className="nav-center" ref={dropdownRef}>
+            <div className="nav-links">
 
-    const handleLogoClick = () => {
-        setLogoRipple(true);
-        setTimeout(() => setLogoRipple(false), 400);
-    };
+              {/* DROPDOWN MENUS */}
+              {[
+                {
+                  label: "Jobs",
+                  key: "jobs",
+                  links: [
+                    ["/jobs/it", "IT Jobs"],
+                    ["/jobs/marketing", "Marketing Jobs"],
+                    ["/jobs/engineering", "Engineering Jobs"],
+                  ],
+                },
+                {
+                  label: "Internships",
+                  key: "internships",
+                  links: [
+                    ["/internship/work-from-home", "Work From Home"],
+                    ["/internship/design", "Design"],
+                    ["/internship/engineering", "Engineering"],
+                  ],
+                },
+                {
+                  label: "Courses",
+                  key: "courses",
+                  links: [
+                    ["/courses/fullstack", "Full Stack"],
+                    ["/courses/uiux", "UI/UX"],
+                    ["/courses/python", "Python"],
+                  ],
+                },
+                {
+                  label: "Campus",
+                  key: "campus",
+                  links: [
+                    ["/campus/ambassador", "Campus Ambassador"],
+                    ["/campus/programs", "Programs"],
+                  ],
+                },
+                {
+                  label: "Career Gap?",
+                  key: "gap",
+                  links: [
+                    ["/career-gap/restart", "Restart Career"],
+                    ["/career-gap/wfh", "Work From Home"],
+                  ],
+                },
+                {
+                  label: "Staffing",
+                  key: "staffing",
+                  links: [
+                    ["/staffing/it", "IT Staffing"],
+                    ["/staffing/non-it", "Non-IT Staffing"],
+                  ],
+                },
+              ].map((menu) => (
+                <div
+                  key={menu.key}
+                  className="nav-item"
+                  onClick={() => toggleMenu(menu.key)}
+                  onMouseEnter={() => activeMenu && setActiveMenu(menu.key)}
+                >
+                  <span>{menu.label}</span>
+                  <ChevronDown size={15} />
 
-    const toggleDropdown = (menu) => {
-        setActiveMega(activeMega === menu ? null : menu);
-    };
-
-    /* CLOSE PREVIOUS DROPDOWN WHEN HOVERING A NEW MENU */
-    const handleNavHover = (menu) => {
-        if (activeMega && activeMega !== menu) {
-            closeDropdown();
-        }
-    };
-
-    return (
-        <>
-            <motion.nav
-                className="navbar"
-                animate={{ y: hidden ? -90 : 0 }}
-                transition={{ duration: 0.3 }}
-            >
-                <div className="nav-inner">
-
-                    {/* LOGO */}
-                    <Link to="/" className="nav-logo" onClick={handleLogoClick}>
-                        <div className={`logo-wrapper ${logoRipple ? "ripple" : ""}`}>
-                            <img src={logoPng} alt="Logo" className="logo-img" />
-                        </div>
-                    </Link>
-
-                    {/* CENTER NAV */}
-                    <div className="nav-center" ref={dropdownRef}>
-                        <div className="nav-links">
-
-                            {/* JOBS */}
-                            <div
-                                className="nav-item"
-                                onMouseEnter={() => handleNavHover("jobs")}
-                                onClick={() => toggleDropdown("jobs")}
-                            >
-                                <span>Jobs</span> <ChevronDown size={16} />
-
-                                {activeMega === "jobs" && (
-                                    <motion.div className="mega-menu modern-dropdown">
-                                        <div className="dropdown-arrow"></div>
-                                        <Link to="/jobs/it" onClick={closeDropdown}>IT Jobs</Link>
-                                        <Link to="/jobs/marketing" onClick={closeDropdown}>Marketing Jobs</Link>
-                                        <Link to="/jobs/engineering" onClick={closeDropdown}>Engineering Jobs</Link>
-                                    </motion.div>
-                                )}
-                            </div>
-
-                            {/* INTERNSHIPS */}
-                            <div
-                                className="nav-item"
-                                onMouseEnter={() => handleNavHover("internships")}
-                                onClick={() => toggleDropdown("internships")}
-                            >
-                                <span>Internships</span> <ChevronDown size={16} />
-
-                                {activeMega === "internships" && (
-                                    <motion.div className="mega-menu modern-dropdown">
-                                        <div className="dropdown-arrow"></div>
-                                        <Link to="/internship/work-from-home" onClick={closeDropdown}>Work From Home</Link>
-                                        <Link to="/internship/design" onClick={closeDropdown}>Design Internships</Link>
-                                        <Link to="/internship/engineering" onClick={closeDropdown}>Engineering Internships</Link>
-                                    </motion.div>
-                                )}
-                            </div>
-
-                            {/* COURSES */}
-                            <div
-                                className="nav-item"
-                                onMouseEnter={() => handleNavHover("courses")}
-                                onClick={() => toggleDropdown("courses")}
-                            >
-                                <span>Courses</span> <ChevronDown size={16} />
-
-                                {activeMega === "courses" && (
-                                    <motion.div className="mega-menu modern-dropdown large">
-                                        <div className="dropdown-arrow"></div>
-
-                                        <div>
-                                            <h4>Popular</h4>
-                                            <Link to="/courses/fullstack" onClick={closeDropdown}>Full Stack</Link>
-                                            <Link to="/courses/uiux" onClick={closeDropdown}>UI/UX</Link>
-                                        </div>
-
-                                        <div>
-                                            <h4>Certifications</h4>
-                                            <Link to="/courses/java" onClick={closeDropdown}>Java</Link>
-                                            <Link to="/courses/python" onClick={closeDropdown}>Python</Link>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </div>
-
-                            {/* SEARCH BAR */}
-                            <div className="nav-search">
-                                <input
-                                    type="text"
-                                    placeholder="Search anything..."
-                                    ref={searchRef}
-                                    onFocus={closeDropdown}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") handleSearchSubmit();
-                                    }}
-                                />
-                                <Search
-                                    size={18}
-                                    className="search-icon clickable"
-                                    onClick={handleSearchSubmit}
-                                />
-                            </div>
-
-                            {/* LOGIN */}
-                            <Link to="/login" className="nav-btn login-btn" onClick={closeDropdown}>
-                                Login
-                            </Link>
-
-                            {/* REGISTER */}
-                            <Link to="/register" className="nav-btn register-btn" onClick={closeDropdown}>
-                                Register
-                            </Link>
-
-                            {/* EMPLOYERS */}
-                            <Link to="/employer" className="nav-btn employer-btn" onClick={closeDropdown}>
-                                For Employers
-                            </Link>
-
-                        </div>
-                    </div>
-
-                    {/* MOBILE MENU BUTTON */}
-                    <button
-                        className={`hamburger ${menuOpen ? "open" : ""}`}
-                        onClick={() => {
-                            closeDropdown();
-                            setMenuOpen(!menuOpen);
-                        }}
+                  {activeMenu === menu.key && (
+                    <motion.div
+                      className="mega-menu"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
                     >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
+                      {menu.links.map(([to, text]) => (
+                        <Link key={to} to={to} onClick={() => setActiveMenu(null)}>
+                          {text}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
                 </div>
-            </motion.nav>
+              ))}
 
-            {/* MOBILE MENU */}
-            <div className={`mobile-menu ${menuOpen ? "show-menu" : ""}`}>
-                <div className="mobile-top">
-                    <h2>Menu</h2>
-                    <X size={30} onClick={() => setMenuOpen(false)} />
-                </div>
+              {/* SEARCH BAR */}
+              <div className="nav-search" onClick={() => setActiveMenu(null)}>
+                <input
+                  type="text"
+                  placeholder="Search anything..."
+                  ref={searchRef}
+                  onFocus={() => setActiveMenu(null)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+                />
+                <Search
+                  size={17}
+                  className="search-icon"
+                  onClick={handleSearchSubmit}
+                />
+              </div>
 
-                <Link to="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
-                <Link to="/internship" onClick={() => setMenuOpen(false)}>Internships</Link>
-                <Link to="/courses" onClick={() => setMenuOpen(false)}>Courses</Link>
-                <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-                <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
-                <Link to="/employer" onClick={() => setMenuOpen(false)}>For Employers</Link>
+              {/* LOGIN / REGISTER (still in center group) */}
+              <Link
+                to="/login"
+                className="nav-btn login-btn"
+                onClick={() => setActiveMenu(null)}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="nav-btn register-btn"
+                onClick={() => setActiveMenu(null)}
+              >
+                Register
+              </Link>
             </div>
-        </>
-    );
+          </div>
+
+          {/* RIGHT: FOR EMPLOYERS + HAMBURGER (mobile) */}
+          <div className="nav-right">
+            <Link
+              to="/employer"
+              className="nav-btn employer-btn"
+              onClick={() => setActiveMenu(null)}
+            >
+              For Employers
+            </Link>
+
+            <button
+              className={`hamburger ${menuOpen ? "open" : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+
+        </div>
+      </motion.nav>
+
+      {/* MOBILE MENU */}
+      <div className={`mobile-menu ${menuOpen ? "show-menu" : ""}`}>
+        <div className="mobile-top">
+          <h2>Menu</h2>
+          <X size={28} onClick={() => setMenuOpen(false)} />
+        </div>
+
+        <Link to="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
+        <Link to="/internship" onClick={() => setMenuOpen(false)}>Internships</Link>
+        <Link to="/courses" onClick={() => setMenuOpen(false)}>Courses</Link>
+        <Link to="/campus" onClick={() => setMenuOpen(false)}>Campus</Link>
+        <Link to="/career-gap" onClick={() => setMenuOpen(false)}>Career Gap?</Link>
+        <Link to="/staffing" onClick={() => setMenuOpen(false)}>Staffing</Link>
+        <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+        <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
+        <Link to="/employer" onClick={() => setMenuOpen(false)}>For Employers</Link>
+      </div>
+    </>
+  );
 };
 
 export default Navbar;
